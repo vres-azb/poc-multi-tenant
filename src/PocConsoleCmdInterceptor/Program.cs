@@ -28,7 +28,7 @@ public class Program
         {
 
             var ordersT1 = context.Orders.TagWith("tenantId:1").ToList();
-            Debug.Assert(ordersT1.Count == 3);
+            Debug.Assert(ordersT1.Count == 4);
 
             var ordersT2 = context.Orders.TagWith("tenantId:2").ToList();
             Debug.Assert(ordersT2.Count == 3);
@@ -60,8 +60,8 @@ public class Program
     {
         using (var context = new TenantDbContext())
         {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
 
             context.AddRange(
                 new User { Name = "Alice", Email = "alice@tenant1.com", Role = "Admin" },
@@ -83,6 +83,7 @@ public class Program
                 new Order { OrderId = 1, TenantId = 1, UserId = 1 },
                 new Order { OrderId = 2, TenantId = 1, UserId = 2 },
                 new Order { OrderId = 3, TenantId = 1, UserId = 2 },
+                new Order { OrderId = 4, TenantId = 1, UserId = 3 },
                 new Order { OrderId = 21, TenantId = 2, UserId = 1 },
                 new Order { OrderId = 22, TenantId = 2, UserId = 3 },
                 new Order { OrderId = 22, TenantId = 2, UserId = 4 },

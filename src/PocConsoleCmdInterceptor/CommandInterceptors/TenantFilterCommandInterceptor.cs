@@ -31,7 +31,8 @@ namespace PocConsoleCmdInterceptor.CommandInterceptors
         {
             if (command.CommandText.StartsWith("-- tenantId:", StringComparison.Ordinal))
             {
-                var tenantId = command.CommandText.Split("\n\n")[0].Replace("-- tenantId:", string.Empty);
+                // TODO: Refactor this later.... Windows != MacOs
+                var tenantId = command.CommandText.Split("\r\n\r\n")[0].Replace("-- tenantId:", string.Empty);
 
                 // Set SESSION_CONTEXT to current UserId before executing queries
                 var sql = "EXEC sp_set_session_context @key=N'tenantId', @value=@tenantId;";
